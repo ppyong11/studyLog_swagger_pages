@@ -4,8 +4,8 @@ info:
   title: Study Log API Document
   description: This is Study Log API Document
 servers:
-- url: https://studylog.hyeoncode.dev
-  description: 서버 도메인
+- url: http://3.106.136.131:8080
+  description: Generated server url
 tags:
 - name: Lap
   description: Lap API, 모든 요청 access token 필요
