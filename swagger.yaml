@@ -5,7 +5,7 @@ info:
   description: This is Study Log API Document
 servers:
 - url: https://studylog.hyeoncode.dev
-  description: 도메인 서버
+  description: 서버 도메인
 tags:
 - name: Lap
   description: Lap API, 모든 요청 access token 필요
@@ -50,8 +50,6 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/TimerDetailResponse"
-      security:
-      - bearerAuth: []
   "/api/timers/{timerId}/laps":
     post:
       tags:
@@ -97,8 +95,6 @@ paths:
                 example:
                   success: false
                   message: 존재하지 않는 타이머입니다.
-      security:
-      - bearerAuth: []
   "/api/signin":
     post:
       tags:
@@ -198,17 +194,6 @@ paths:
       - User-auth
       summary: 액세스 토큰 재발급
       operationId: refreshAccessToken
-      parameters:
-      - name: access_token
-        in: cookie
-        required: false
-        schema:
-          type: string
-      - name: refresh_token
-        in: cookie
-        required: false
-        schema:
-          type: string
       responses:
         '200':
           description: 토큰 재발급 성공
@@ -229,8 +214,6 @@ paths:
                   success: false
                   message: 액세스 토큰 X- 로그인이 필요한 요청입니다. / 리프레시 토큰 X- 재발급 검증에 필요한 토큰이
                     없습니다. / 블랙리스트 처리된 리프레시 토큰- 유효하지 않은 토큰입니다.
-      security:
-      - bearerAuth: []
   "/api/plans":
     post:
       tags:
@@ -262,20 +245,12 @@ paths:
                 example:
                   success: false
                   message: 없는 카테고리 지정- 존재하지 않는 카테고리입니다.
-      security:
-      - bearerAuth: []
   "/api/member/withdraw":
     post:
       tags:
       - User-auth
       summary: 회원탈퇴 (softDelete - 7일간 회원 정보 보관)
       operationId: withdraw
-      parameters:
-      - name: access_token
-        in: cookie
-        required: true
-        schema:
-          type: string
       responses:
         '200':
           description: 회원탈퇴 성공
@@ -304,20 +279,12 @@ paths:
                 example:
                   success: false
                   message: 로그인이 필요한 요청입니다.
-      security:
-      - bearerAuth: []
   "/api/logout":
     post:
       tags:
       - User-auth
       summary: 로그아웃
       operationId: logout
-      parameters:
-      - name: access_token
-        in: cookie
-        required: true
-        schema:
-          type: string
       responses:
         '200':
           description: OK
@@ -325,8 +292,6 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/CommonResponse"
-      security:
-      - bearerAuth: []
   "/api/login":
     post:
       tags:
@@ -424,8 +389,6 @@ paths:
                 example:
                   success: false
                   message: 파일 업로드 실패
-      security:
-      - bearerAuth: []
   "/api/categories":
     post:
       tags:
@@ -445,8 +408,6 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/CommonResponse"
-      security:
-      - bearerAuth: []
   "/api/boards":
     post:
       tags:
@@ -485,8 +446,6 @@ paths:
                 example:
                   success: false
                   message: 존재하지 않는 카테고리입니다.
-      security:
-      - bearerAuth: []
   "/api/timers/{timerId}":
     get:
       tags:
@@ -516,8 +475,6 @@ paths:
                 example:
                   success: false
                   message: 존재하지 않는 타이머입니다.
-      security:
-      - bearerAuth: []
     delete:
       tags:
       - Timer
@@ -537,8 +494,6 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/CommonResponse"
-      security:
-      - bearerAuth: []
     patch:
       tags:
       - Timer
@@ -565,8 +520,6 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/TimerDetailResponse"
-      security:
-      - bearerAuth: []
   "/api/timers/{timerId}/sync":
     patch:
       tags:
@@ -588,8 +541,6 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/TimerDetailResponse"
-      security:
-      - bearerAuth: []
   "/api/timers/{timerId}/start":
     patch:
       tags:
@@ -610,8 +561,6 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/TimerDetailResponse"
-      security:
-      - bearerAuth: []
   "/api/timers/{timerId}/reset":
     patch:
       tags:
@@ -633,8 +582,6 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/TimerDetailResponse"
-      security:
-      - bearerAuth: []
   "/api/timers/{timerId}/pause":
     patch:
       tags:
@@ -655,8 +602,6 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/TimerDetailResponse"
-      security:
-      - bearerAuth: []
   "/api/timers/{timerId}/laps/{lapId}":
     delete:
       tags:
@@ -684,8 +629,6 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/TimerDetailResponse"
-      security:
-      - bearerAuth: []
     patch:
       tags:
       - Lap
@@ -718,8 +661,6 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/TimerDetailResponse"
-      security:
-      - bearerAuth: []
   "/api/timers/{timerId}/laps/{lapId}/start":
     patch:
       tags:
@@ -747,8 +688,6 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/TimerDetailResponse"
-      security:
-      - bearerAuth: []
   "/api/timers/{timerId}/laps/{lapId}/pause":
     patch:
       tags:
@@ -776,8 +715,6 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/TimerDetailResponse"
-      security:
-      - bearerAuth: []
   "/api/timers/{timerId}/laps/{lapId}/end":
     patch:
       tags:
@@ -805,8 +742,6 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/TimerDetailResponse"
-      security:
-      - bearerAuth: []
   "/api/timers/{timerId}/end":
     patch:
       tags:
@@ -827,8 +762,6 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/TimerDetailResponse"
-      security:
-      - bearerAuth: []
   "/api/plans/{planId}":
     get:
       tags:
@@ -858,8 +791,6 @@ paths:
                 example:
                   success: false
                   message: 존재하지 않는 계획입니다.
-      security:
-      - bearerAuth: []
     delete:
       tags:
       - Plan
@@ -879,8 +810,6 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/CommonResponse"
-      security:
-      - bearerAuth: []
     patch:
       tags:
       - Plan
@@ -906,8 +835,6 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/CommonResponse"
-      security:
-      - bearerAuth: []
   "/api/plans/{planId}/status":
     patch:
       tags:
@@ -933,8 +860,6 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/CommonResponse"
-      security:
-      - bearerAuth: []
   "/api/notifications/{id}/read":
     patch:
       tags:
@@ -951,8 +876,6 @@ paths:
       responses:
         '200':
           description: OK
-      security:
-      - bearerAuth: []
   "/api/notifications/read-all":
     patch:
       tags:
@@ -966,8 +889,6 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/CommonResponse"
-      security:
-      - bearerAuth: []
   "/api/member/change-resolution":
     patch:
       tags:
@@ -987,8 +908,6 @@ paths:
             "*/*":
               schema:
                 type: string
-      security:
-      - bearerAuth: []
   "/api/member/change-pw":
     patch:
       tags:
@@ -1008,8 +927,6 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/CommonResponse"
-      security:
-      - bearerAuth: []
   "/api/member/change-nickname":
     patch:
       tags:
@@ -1029,8 +946,6 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/CommonResponse"
-      security:
-      - bearerAuth: []
   "/api/categories/{categoryId}":
     get:
       tags:
@@ -1060,8 +975,6 @@ paths:
                 example:
                   success: false
                   message: 존재하지 않는 카테고리입니다.
-      security:
-      - bearerAuth: []
     delete:
       tags:
       - Category
@@ -1102,8 +1015,6 @@ paths:
                 example:
                   success: false
                   message: 존재하지 않는 카테고리입니다.
-      security:
-      - bearerAuth: []
     patch:
       tags:
       - Category
@@ -1129,8 +1040,6 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/CommonResponse"
-      security:
-      - bearerAuth: []
   "/api/boards/{boardId}":
     get:
       tags:
@@ -1160,8 +1069,6 @@ paths:
                 example:
                   success: false
                   message: 존재하지 않는 게시글입니다.
-      security:
-      - bearerAuth: []
     delete:
       tags:
       - Board
@@ -1181,8 +1088,6 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/CommonResponse"
-      security:
-      - bearerAuth: []
     patch:
       tags:
       - Board
@@ -1208,8 +1113,6 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/BoardDetailResponse"
-      security:
-      - bearerAuth: []
   "/api/timers/search":
     get:
       tags:
@@ -1267,8 +1170,6 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/TimerResponse"
-      security:
-      - bearerAuth: []
   "/api/sse/subscribe":
     get:
       tags:
@@ -1282,8 +1183,6 @@ paths:
             text/event-stream:
               schema:
                 "$ref": "#/components/schemas/SseEmitter"
-      security:
-      - bearerAuth: []
   "/api/sse/subscribe/status":
     get:
       tags:
@@ -1300,8 +1199,6 @@ paths:
                 example:
                   success: true
                   message: 구독된 알림 채널이 없습니다.
-      security:
-      - bearerAuth: []
   "/api/signin/check-info":
     get:
       tags:
@@ -1382,8 +1279,6 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/PlanDetailResponse"
-      security:
-      - bearerAuth: []
   "/api/notifications":
     get:
       tags:
@@ -1424,8 +1319,6 @@ paths:
                 example:
                   success: false
                   message: 로그인이 필요한 요청입니다.
-      security:
-      - bearerAuth: []
   "/api/notifications/unread-count":
     get:
       tags:
@@ -1441,8 +1334,6 @@ paths:
               schema:
                 type: integer
                 format: int64
-      security:
-      - bearerAuth: []
   "/api/main/":
     get:
       tags:
@@ -1526,8 +1417,6 @@ paths:
                 example:
                   success: false
                   message: 로그인이 필요한 요청입니다.
-      security:
-      - bearerAuth: []
   "/api/main":
     get:
       tags:
@@ -1611,8 +1500,6 @@ paths:
                 example:
                   success: false
                   message: 로그인이 필요한 요청입니다.
-      security:
-      - bearerAuth: []
   "/api/files/{fileId}":
     get:
       tags:
@@ -1634,8 +1521,6 @@ paths:
               schema:
                 type: string
                 format: binary
-      security:
-      - bearerAuth: []
     delete:
       tags:
       - File
@@ -1691,8 +1576,6 @@ paths:
                 example:
                   success: false
                   message: 존재하지 않는 게시글입니다.
-      security:
-      - bearerAuth: []
   "/api/categories/search":
     get:
       tags:
@@ -1721,8 +1604,6 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/CategoryResponse"
-      security:
-      - bearerAuth: []
   "/api/boards/search":
     get:
       tags:
@@ -1757,8 +1638,6 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/BoardResponse"
-      security:
-      - bearerAuth: []
   "/api/notifications/{id}":
     delete:
       tags:
@@ -1775,8 +1654,6 @@ paths:
       responses:
         '200':
           description: OK
-      security:
-      - bearerAuth: []
   "/api/notifications/":
     delete:
       tags:
@@ -1790,8 +1667,6 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/CommonResponse"
-      security:
-      - bearerAuth: []
 components:
   schemas:
     TimerRequest:
@@ -2332,8 +2207,3 @@ components:
           type: string
           description: 카테고리명
           example: 공부
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
