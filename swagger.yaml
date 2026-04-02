@@ -7,8 +7,6 @@ servers:
 - url: https://studylog.hyeoncode.dev
   description: 도메인 서버
 tags:
-- name: Lap
-  description: Lap API, 모든 요청 access token 필요
 - name: User-auth
   description: JWT 관련 API, 로그인 제외 모든 요청 access token 필요
 - name: Timer
@@ -50,51 +48,6 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/TimerDetailResponse"
-  "/api/timers/{timerId}/laps":
-    post:
-      tags:
-      - Lap
-      summary: 랩 등록
-      operationId: createLap
-      parameters:
-      - name: timerId
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/LapRequest"
-        required: true
-      responses:
-        '200':
-          description: 랩 등록 성공
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/LapResponse"
-        '400':
-          description: 랩 등록 실패
-          content:
-            application/json:
-              schema:
-                type: string
-                example:
-                  success: false
-                  message: 종료 타이머에 생성 시- 종료된 타이머는 랩 생성이 불가합니다. / 동일 랩명 지정- 해당 랩명이
-                    존재합니다.
-        '404':
-          description: 랩 등록 실패
-          content:
-            application/json:
-              schema:
-                type: string
-                example:
-                  success: false
-                  message: 존재하지 않는 타이머입니다.
   "/api/signin":
     post:
       tags:
