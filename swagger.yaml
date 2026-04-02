@@ -4,7 +4,7 @@ info:
   title: Study Log API Document
   description: This is Study Log API Document
 servers:
-- url: https://studylog.hyeoncode.dev
+- url: https://api.studylog.hyeoncode.dev
   description: 도메인 서버
 tags:
 - name: User-auth
